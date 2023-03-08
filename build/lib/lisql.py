@@ -2,36 +2,35 @@
 from contextlib import nullcontext
 import mysql.connector
 import contextlib
-import tkinter as tk
-import webbrowser
-from PIL import Image, ImageTk, ImageDraw
 
 #Start of create connection
 def creacon():
-  global mydb
-  mydb = mysql.connector.connect(
-      host = 'localhost',
-      user = "root",
-      password = ""
-      )
-  if mydb!=nullcontext:
-    print("MySQL Connected")
-  else:
-    print("MySQL Not Connected")
+    global mydb
+    if not mydb:
+        mydb = mysql.connector.connect(
+            host='localhost',
+            user="root",
+            password=""
+        )
+    if mydb.is_connected():
+        print("MySQL Connected")
+    else:
+        print("MySQL Not Connected")
 #End of create connection
 
 #Start of create custom connection
 def creacuscon(host, username, password):
-  global mydb
-  mydb = mysql.connector.connect(
-      host = host,
-      user = username,
-      password = password
-      )
-  if mydb!=nullcontext:
-    print("MySQL Connected")
-  else:
-    print("MySQL Not Connected")
+    global mydb
+    if not mydb:
+        mydb = mysql.connector.connect(
+            host=host,
+            user=username,
+            password=password
+        )
+    if mydb.is_connected():
+        print("MySQL Connected")
+    else:
+        print("MySQL Not Connected")
 #End of create custom connection
 
 #Start of create database
