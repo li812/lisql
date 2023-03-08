@@ -41,3 +41,186 @@ import lisql
 
 lisql.creacon()
 ```
+
+### Creating a custom connection
+To create a custom connection to a MySQL server with the provided host, username, and password, use the creacuscon function:
+
+```
+import lisql
+
+lisql.creacuscon(host, username, password)
+```
+
+### Creating a database
+To create a new MySQL database with the given name if it does not already exist, use the creadb function:
+
+```
+import lisql
+
+lisql.creadb(name)
+
+```
+
+### Dropping a database
+To drop the MySQL database with the given name if it exists, use the dropdb function:
+
+```
+import lisql
+
+lisql.dropdb(name)
+
+```
+
+### Connecting to a database
+To connect to the MySQL database with the given name if it exists, use the condb function:
+
+```
+import lisql
+
+lisql.condb(database_name)
+
+```
+
+### Connecting to a custom database
+To connect to the custom MySQL database with the provided host, username, password, and dbname, use the cuscondb function:
+
+```
+import lisql
+
+lisql.cuscondb(host, username, password, dbname)
+
+```
+
+### Creating a table
+To create a new table in the currently connected MySQL database with the given table name and columns, use the create_table function:
+
+```
+import lisql
+
+columns = {
+    "column1": "VARCHAR(255)",
+    "column2": "INT",
+    "column3": "DATETIME"
+}
+
+lisql.create_table("my_table", columns)
+
+```
+
+### Dropping a table
+To drop the table with the given table name in the currently connected MySQL database, use the drop_table function:
+
+```
+import lisql
+
+lisql.drop_table("my_table")
+
+```
+
+### Inserting data
+To insert a row of data into the table with the given table name and values, use the insert_data function:
+
+```
+import lisql
+
+values = {
+    "column1": "value1",
+    "column2": 123,
+    "column3": "2022-03-08 12:00:00"
+}
+
+lisql.insert_data("my_table", values)
+
+```
+
+### Retrieving data
+To retrieve the data from the table with the given table name and columns, use the select_data function:
+
+```
+import lisql
+
+columns = ["column1", "column2", "column3"]
+data = lisql.select_data("my_table", columns)
+
+for row in data:
+    print(row)
+
+```
+
+### Updating data
+To update the rows in the table with the given table name that meet the given condition with the new column values, use the update_data function:
+
+```
+import lisql
+
+column_values = {
+    "column2": 456,
+    "column3": "2022-03-08 13:00:00"
+}
+
+condition = "column1 = 'value1'"
+
+lisql.update_data("my_table", column_values, condition)
+
+```
+
+### Deleting Data
+To delete rows from a table, you can use the delete_data function. It takes two arguments: the table_name and a condition that specifies which rows to delete.
+
+```
+import lisql
+table_name = "employees"
+condition = "salary < 50000"
+
+lisql.delete_data(table_name, condition)
+
+```
+
+### Closing the Connection
+When you're finished working with the database, you should close the connection using the close_con function. This will close the connection to the database. If you try to execute any functions that require a database connection after calling close_con, you will get an error.
+
+```
+import lisql
+lisql.close_con()
+
+```
+
+### Getting a List of Databases and Tables
+You can get a list of all the databases on the MySQL server using the show_databases function. This will return a list of database names.
+
+```
+import lisql
+lisql.show_databases()
+```
+
+To get a list of all the tables in the currently selected database, you can use the show_tables function:
+
+```
+import lisql
+lisql.show_tables()
+```
+This will return a list of table names.
+
+### Executing SQL Queries
+If you need to execute a SQL query that is not covered by the functions provided by lisql, you can use the execute_query function. It takes one argument: the SQL query string.
+
+```
+import lisql
+lisql.execute_query(query)
+```
+
+By default, execute_query will not return any results. If you want to retrieve the results of the query, you can set the fetch argument to True:
+```
+im;ort lisql
+lisql.execute_query(query, fetch=True)
+```
+This will return the results of the query as a list of tuples.
+
+### Retrieving Table Information
+You can get information about the columns in a table using the describe_table function. It takes one argument: the table_name.
+
+```
+import lisql
+lisql.describe_table(table_name)
+```
+This will return a list of dictionaries, where each dictionary represents a column in the table. The keys of the dictionary are the column attributes (e.g. "Field", "Type", "Null", etc.) and the values are the corresponding values for each column.
