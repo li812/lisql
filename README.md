@@ -1,6 +1,14 @@
-# Lisql Package
+# lisql
 
-Lisql is a Python package that provides a simple interface for interacting with MySQL databases. It includes functions for creating connections, creating and dropping databases and tables, inserting and selecting data, updating and deleting rows, and more.
+lisql is a Python package that provides a simple interface for interacting with MySQL databases. It includes functions for creating connections, creating and dropping databases and tables, inserting and selecting data, updating and deleting rows, and more.
+
+## Installation
+
+To install `lisql`, use pip:
+```
+pip install lisql
+```
+
 
 ## Functions
 

@@ -1,3 +1,4 @@
+#Start of lisql package source code
 from contextlib import nullcontext
 import mysql.connector
 import contextlib
@@ -264,7 +265,7 @@ def describe_table(table_name):
 
 
 
-
+#Start of about
 def about():
   class AboutMeWindow(tk.Tk):
       def __init__(self, photo_path, name, email):
@@ -327,3 +328,6 @@ def about():
       close_button = tk.Button(window, text="Close", command=window.destroy)
       close_button.pack(pady=5)
       window.mainloop()
+#End of about 
+#End of lisql package source code
+
