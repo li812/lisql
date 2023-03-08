@@ -29,3 +29,15 @@ pip install lisql
 - `show_tables()`: retrieves a list of all tables in the currently selected database.
 - `execute_query(query, fetch=False)`: executes a SQL query string using a cursor object.
 - `describe_table(table_name)`: retrieves information about the columns of a table.
+- `about()`: to know about the auother.
+
+
+##Usage
+###Creating a default connection
+To create a default connection to a MySQL server on the localhost with default credentials, use the creacon function:
+
+```
+import lisql
+
+lisql.creacon()
+```
