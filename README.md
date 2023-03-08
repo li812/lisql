@@ -1,249 +1,291 @@
-# lisql
+# `lisql`
 
-lisql is a Python package that provides a simple interface for interacting with MySQL databases. It includes functions for creating connections, creating and dropping databases and tables, inserting and selecting data, updating and deleting rows, and more.
+The `lisql` package is a Python library that provides a simple interface for interacting with MySQL databases using the mysql-connector-python library. It allows users to perform various operations on MySQL databases such as creating and connecting to databases, creating tables, inserting and retrieving data, updating and deleting data, and executing custom SQL queries.
+
+Using `lisql` provides benefits over other similar packages as it provides an easy-to-use and streamlined interface for performing common operations on MySQL databases. The package is also lightweight, making it ideal for small to medium-sized projects that require working with MySQL databases.
+
+## Requirements:
+Python 3.6 or higher
+mysql-connector-python library (version 8.0 or higher)
+
+You can install the mysql-connector-python library using pip:
+```commandline
+pip install mysql-connector-python
+
+```
+## Installation:
+
+To install the `lisql` package, you can follow the steps below:
+
+1: Open a terminal or command prompt on your machine.
+```commandline
+python --version
+
+```
+2: Make sure you have  `Python 3.6` or higher installed on your machine. You can check your Python version by running the above command.
 
 
-# Make sure you have upgraded version of pip
-Windows
-```
-py -m pip install --upgrade pip
-```
-
-Linux/MAC OS
-```
-python3 -m pip install --upgrade pip
-```
-
-# Make sure you mysql connector installed
-Windows
-```
-py -m pip install mysql-connector-python
-```
-
-Linux/MAC OS
-```
-python3 -m pip install mysql-connector-python
-```
-
-
-## INSTALATION
-Run the following to install `lisql`, using pip:
-```
+3: Install the `lisql` package using pip:
+```commandline
 pip install lisql
 ```
 
+This will automatically install the required `mysql-connector-python` library as a dependency.
 
-## Functions
+4: You can now start using the `lisql` package in your Python scripts by importing it:
+```commandline
+import lisql
 
-- `creacon()`: creates a connection to a MySQL server on the localhost with default credentials.
-- `creacuscon(host, username, password)`: creates a custom connection to a MySQL server with the provided host, username, and password.
-- `creadb(name)`: creates a new MySQL database with the given name if it does not already exist.
-- `dropdb(name)`: drops the MySQL database with the given name if it exists.
-- `condb(name)`: connects to the MySQL database with the given name if it exists.
-- `cuscondb(host, username, password, dbname)`: connects to the custom MySQL database with the provided host, username, password, and dbname.
-- `create_table(table_name, columns)`: creates a new table in the currently connected MySQL database with the given table name and columns.
-- `drop_table(table_name)`: drops the table with the given table name in the currently connected MySQL database.
-- `insert_data(table_name, values)`: inserts a row of data into the table with the given table name and values.
-- `select_data(table_name, columns)`: retrieves the data from the table with the given table name and columns.
-- `update_data(table_name, column_values, condition)`: updates the rows in the table with the given table name that meet the given condition with the new column values.
-- `delete_data(table_name, condition)`: deletes the rows in the table with the given table name that meet the given condition.
-- `close_con()`: closes the connection to the MySQL database if it is open.
-- `show_databases()`: retrieves a list of all databases on the MySQL server.
-- `show_tables()`: retrieves a list of all tables in the currently selected database.
-- `execute_query(query, fetch=False)`: executes a SQL query string using a cursor object.
-- `describe_table(table_name)`: retrieves information about the columns of a table.
-- `about()`: to know about the auother.
+```
 
+5: If you want to use a remote MySQL server, make sure you have the necessary credentials (host, username, and password) to connect to the server.
 
-## Usage
-### Creating a default connection
-To create a default connection to a MySQL server on the localhost with default credentials, use the creacon function:
+6: To connect to a remote MySQL server, you can use the `create_remote_connection()` function, passing in the host, username, and password as arguments:
+```
+mydb = lisql.create_remote_connection(host, username, password)
+```
 
+7: Once you have a database connection, you can use the `connect_database()` function to connect to a specific database:
+```commandline
+mydb = lisql.connect_database(mydb, 'mydatabase')
+
+```
+8: You can now start executing SQL queries using the `lisql` package.
+Note: If you encounter any errors during installation, make sure you have the necessary permissions to install Python packages on your machine. You can also try running the installation command with administrative privileges (e.g., using sudo on Linux or macOS).
+
+## Usage:
+
+### 1: Creating a Connection
+To create a connection to a MySQL server, you can use the create_connection() function:
 ```
 import lisql
 
-lisql.creacon()
+mydb = lisql.create_connection()
 ```
-
-### Creating a custom connection
-To create a custom connection to a MySQL server with the provided host, username, and password, use the creacuscon function:
-
+You can also create a connection to a remote server by passing in the host, username, and password:
 ```
-import lisql
-
-lisql.creacuscon(host, username, password)
-```
-
-### Creating a database
-To create a new MySQL database with the given name if it does not already exist, use the creadb function:
+mydb = lisql.create_remote_connection(host, username, password)
 
 ```
-import lisql
+### 2: Connecting to a Database
+To connect to a database, you can use the connect_database() function:
 
-lisql.creadb(name)
-
-```
-
-### Dropping a database
-To drop the MySQL database with the given name if it exists, use the dropdb function:
+```commandline
+mydb = lisql.connect_database(mydb, 'mydatabase')
 
 ```
-import lisql
-
-lisql.dropdb(name)
+### 3: Connecting to a remote Database
+To creates a connection to a remote MySQL database using the specified host, user, and password.
+```commandline
+mydb = lisql.connect_remote_database(mydb, 'mydatabase')
+```
+### 4: Creating a Database
+To create a new database, you can use the create_database() function:
+```commandline
+mydb = lisql.create_database(mydb, 'mydatabase')
+```
+### 5: Showing Tables and Databases
+To show the tables in the current database, you can use the show_tables() function:
+```commandline
+tables = lisql.show_tables(mydb)
 
 ```
-
-### Connecting to a database
-To connect to the MySQL database with the given name if it exists, use the condb function:
-
-```
-import lisql
-
-lisql.condb(database_name)
+To show the databases on the MySQL server, you can use the show_databases() function:
+```commandline
+databases = lisql.show_databases(mydb)
 
 ```
-
-### Connecting to a custom database
-To connect to the custom MySQL database with the provided host, username, password, and dbname, use the cuscondb function:
-
-```
-import lisql
-
-lisql.cuscondb(host, username, password, dbname)
-
-```
-
-### Creating a table
-To create a new table in the currently connected MySQL database with the given table name and columns, use the create_table function:
-
-```
-import lisql
-
-columns = {
-    "column1": "VARCHAR(255)",
-    "column2": "INT",
-    "column3": "DATETIME"
-}
-
-lisql.create_table("my_table", columns)
-
-```
-
-### Dropping a table
-To drop the table with the given table name in the currently connected MySQL database, use the drop_table function:
-
-```
-import lisql
-
-lisql.drop_table("my_table")
-
-```
-
-### Inserting data
-To insert a row of data into the table with the given table name and values, use the insert_data function:
-
-```
-import lisql
-
-values = {
-    "column1": "value1",
-    "column2": 123,
-    "column3": "2022-03-08 12:00:00"
-}
-
-lisql.insert_data("my_table", values)
-
-```
-
-### Retrieving data
-To retrieve the data from the table with the given table name and columns, use the select_data function:
-
-```
-import lisql
-
-columns = ["column1", "column2", "column3"]
-data = lisql.select_data("my_table", columns)
-
+### 6: Selecting Data
+To select data from a table, you can use the select_data() function:
+```commandline
+data = lisql.select_data(mydb, 'mytable', ['column1', 'column2'])
 for row in data:
     print(row)
 
 ```
+### 7: Inserting Data
+To insert data into a table, you can use the insert_data() function:
 
-### Updating data
-To update the rows in the table with the given table name that meet the given condition with the new column values, use the update_data function:
+```commandline
+lisql.insert_data(mydb, 'mytable', ['value1', 'value2'])
 
+```
+
+### 8: Updating Data
+To update data in a table, you can use the update_data() function:
+```commandline
+lisql.update_data(mydb, 'mytable', {'column1': 'value1'}, 'column2 = "value2"')
+
+```
+
+### 9: Deleting Data
+To delete data from a table, you can use the delete_data() function:
+
+```
+lisql.delete_data(mydb, 'mytable', 'column1 = "value1"')
+
+```
+
+### 10: Dropping a Table or Database
+To drop a table, you can use the drop_table() function:
+
+```commandline
+lisql.drop_table(mydb, 'mytable')
+
+```
+To drop a database, you can use the drop_database() function:
+
+```
+lisql.drop_database(mydb, 'mydatabase')
+```
+### 11: Executing a Query
+To execute a custom SQL query, you can use the execute_query() function:
+
+```commandline
+lisql.execute_query(mydb, 'SELECT * FROM mytable', fetch=True)
+
+```
+
+### 12: Describing a Table
+To describe the structure of a table, you can use the describe_table() function:
+```commandline
+lisql.describe_table(mydb, 'mytable')
+```
+
+## Here are some usage examples:
+
+### 1: Creating a connection to a local MySQL server:
 ```
 import lisql
 
-column_values = {
-    "column2": 456,
-    "column3": "2022-03-08 13:00:00"
-}
+# Create a connection
+mydb = lisql.create_connection()
 
-condition = "column1 = 'value1'"
+# Connect to a database
+mydb = lisql.connect_database(mydb, 'mydatabase')
 
-lisql.update_data("my_table", column_values, condition)
-
+# Select data from a table
+data = lisql.select_data(mydb, 'mytable', ['column1', 'column2'])
+for row in data:
+    print(row)
 ```
-
-### Deleting Data
-To delete rows from a table, you can use the delete_data function. It takes two arguments: the table_name and a condition that specifies which rows to delete.
-
-```
+### 2: Creating a connection to a remote MySQL server:
+```commandline
 import lisql
-table_name = "employees"
-condition = "salary < 50000"
 
-lisql.delete_data(table_name, condition)
+# Create a connection to a remote server
+mydb = lisql.create_remote_connection('remote_host', 'remote_user', 'remote_password')
+
+# Connect to a database
+mydb = lisql.connect_remote_database(mydb, 'mydatabase')
+
+# Select data from a table
+data = lisql.select_data(mydb, 'mytable', ['column1', 'column2'])
+for row in data:
+    print(row)
 
 ```
-
-### Closing the Connection
-When you're finished working with the database, you should close the connection using the close_con function. This will close the connection to the database. If you try to execute any functions that require a database connection after calling close_con, you will get an error.
-
-```
+### 3: Inserting data into a table:
+```commandline
 import lisql
-lisql.close_con()
+
+# Create a connection
+mydb = lisql.create_connection()
+
+# Connect to a database
+mydb = lisql.connect_database(mydb, 'mydatabase')
+
+# Insert data into a table
+lisql.insert_data(mydb, 'mytable', ['value1', 'value2'])
 
 ```
 
-### Getting a List of Databases and Tables
-You can get a list of all the databases on the MySQL server using the show_databases function. This will return a list of database names.
-
-```
+### 4: Updating data in a table:
+```commandline
 import lisql
-lisql.show_databases()
+
+# Create a connection
+mydb = lisql.create_connection()
+
+# Connect to a database
+mydb = lisql.connect_database(mydb, 'mydatabase')
+
+# Update data in a table
+lisql.update_data(mydb, 'mytable', {'column1': 'new_value'}, 'column2 = "value2"')
+
 ```
 
-To get a list of all the tables in the currently selected database, you can use the show_tables function:
-
-```
+### 5: Deleting data from a table:
+```commandline
 import lisql
-lisql.show_tables()
-```
-This will return a list of table names.
 
-### Executing SQL Queries
-If you need to execute a SQL query that is not covered by the functions provided by lisql, you can use the execute_query function. It takes one argument: the SQL query string.
+# Create a connection
+mydb = lisql.create_connection()
+
+# Connect to a database
+mydb = lisql.connect_database(mydb, 'mydatabase')
+
+# Delete data from a table
+lisql.delete_data(mydb, 'mytable', 'column1 = "value1"')
 
 ```
+
+
+### 6: Creating a new database:
+```commandline
 import lisql
-lisql.execute_query(query)
-```
 
-By default, execute_query will not return any results. If you want to retrieve the results of the query, you can set the fetch argument to True:
-```
-im;ort lisql
-lisql.execute_query(query, fetch=True)
-```
-This will return the results of the query as a list of tuples.
+# Create a connection
+mydb = lisql.create_connection()
 
-### Retrieving Table Information
-You can get information about the columns in a table using the describe_table function. It takes one argument: the table_name.
+# Create a new database
+mydb = lisql.create_database(mydb, 'mydatabase')
 
 ```
+### 7: Creating a new table:
+```commandline
 import lisql
-lisql.describe_table(table_name)
+
+# Create a connection
+mydb = lisql.create_connection()
+
+# Connect to a database
+mydb = lisql.connect_database(mydb, 'mydatabase')
+
+# Create a new table
+lisql.create_table(mydb, 'mytable', {'column1': 'VARCHAR(255)', 'column2': 'INT'})
+
 ```
-This will return a list of dictionaries, where each dictionary represents a column in the table. The keys of the dictionary are the column attributes (e.g. "Field", "Type", "Null", etc.) and the values are the corresponding values for each column.
+### 8: Dropping a table:
+```commandline
+import lisql
+
+# Create a connection
+mydb = lisql.create_connection()
+
+# Connect to a database
+mydb = lisql.connect_database(mydb, 'mydatabase')
+
+# Drop a table
+lisql.drop_table(mydb, 'mytable')
+
+```
+
+### 9: Dropping a database:
+```commandline
+import lisql
+
+# Create a connection
+mydb = lisql.create_connection()
+
+# Drop a database
+lisql.drop_database(mydb, 'mydatabase')
+
+```
+
+
+## For any questions, bug reports, or feedback, please feel free to contact the developers via the GitHub repository:
+
+### https://github.com/li812/lisql
+
+or by email at aliahammad0812@outlook.com .
