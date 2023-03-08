@@ -32,8 +32,8 @@ pip install lisql
 - `about()`: to know about the auother.
 
 
-##Usage
-###Creating a default connection
+## Usage
+### Creating a default connection
 To create a default connection to a MySQL server on the localhost with default credentials, use the creacon function:
 
 ```
