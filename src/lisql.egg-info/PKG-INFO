@@ -1,3 +1,23 @@
+Metadata-Version: 2.1
+Name: lisql
+Version: 2.0.7
+Summary: Provides simple funtions to interact with MySQL databases and tables.
+Home-page: https://github.com/li812/lisql
+Author: Ali Ahammad
+Author-email: aliahammad0812@outlook.com
+Project-URL: Bug Tracker, https://github.com/li812/lisql/issues
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # `lisql`
 
 The `lisql` package is a Python library that provides a simple interface for interacting with MySQL databases using the mysql-connector-python library. It allows users to perform various operations on MySQL databases such as creating and connecting to databases, creating tables, inserting and retrieving data, updating and deleting data, and executing custom SQL queries.

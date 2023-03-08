@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+src/lisql.py
+src/lisql.egg-info/PKG-INFO
+src/lisql.egg-info/SOURCES.txt
+src/lisql.egg-info/dependency_links.txt
+src/lisql.egg-info/top_level.txt

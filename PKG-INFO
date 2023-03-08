@@ -1,0 +1,269 @@
+Metadata-Version: 2.1
+Name: lisql
+Version: 2.0.2
+Summary: Provides simple funtions to interact with MySQL databases and tables.
+Home-page: https://github.com/li812/lisql
+Author: Ali Ahammad
+Author-email: aliahammad0812@outlook.com
+Project-URL: Bug Tracker, https://github.com/li812/lisql/issues
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# lisql
+
+lisql is a Python package that provides a simple interface for interacting with MySQL databases. It includes functions for creating connections, creating and dropping databases and tables, inserting and selecting data, updating and deleting rows, and more.
+
+
+# Make sure you have upgraded version of pip
+Windows
+```
+py -m pip install --upgrade pip
+```
+
+Linux/MAC OS
+```
+python3 -m pip install --upgrade pip
+```
+
+# Make sure you mysql connector installed
+Windows
+```
+py -m pip install mysql-connector-python
+```
+
+Linux/MAC OS
+```
+python3 -m pip install mysql-connector-python
+```
+
+
+## INSTALATION
+Run the following to install `lisql`, using pip:
+```
+pip install lisql
+```
+
+
+## Functions
+
+- `creacon()`: creates a connection to a MySQL server on the localhost with default credentials.
+- `creacuscon(host, username, password)`: creates a custom connection to a MySQL server with the provided host, username, and password.
+- `creadb(name)`: creates a new MySQL database with the given name if it does not already exist.
+- `dropdb(name)`: drops the MySQL database with the given name if it exists.
+- `condb(name)`: connects to the MySQL database with the given name if it exists.
+- `cuscondb(host, username, password, dbname)`: connects to the custom MySQL database with the provided host, username, password, and dbname.
+- `create_table(table_name, columns)`: creates a new table in the currently connected MySQL database with the given table name and columns.
+- `drop_table(table_name)`: drops the table with the given table name in the currently connected MySQL database.
+- `insert_data(table_name, values)`: inserts a row of data into the table with the given table name and values.
+- `select_data(table_name, columns)`: retrieves the data from the table with the given table name and columns.
+- `update_data(table_name, column_values, condition)`: updates the rows in the table with the given table name that meet the given condition with the new column values.
+- `delete_data(table_name, condition)`: deletes the rows in the table with the given table name that meet the given condition.
+- `close_con()`: closes the connection to the MySQL database if it is open.
+- `show_databases()`: retrieves a list of all databases on the MySQL server.
+- `show_tables()`: retrieves a list of all tables in the currently selected database.
+- `execute_query(query, fetch=False)`: executes a SQL query string using a cursor object.
+- `describe_table(table_name)`: retrieves information about the columns of a table.
+- `about()`: to know about the auother.
+
+
+## Usage
+### Creating a default connection
+To create a default connection to a MySQL server on the localhost with default credentials, use the creacon function:
+
+```
+import lisql
+
+lisql.creacon()
+```
+
+### Creating a custom connection
+To create a custom connection to a MySQL server with the provided host, username, and password, use the creacuscon function:
+
+```
+import lisql
+
+lisql.creacuscon(host, username, password)
+```
+
+### Creating a database
+To create a new MySQL database with the given name if it does not already exist, use the creadb function:
+
+```
+import lisql
+
+lisql.creadb(name)
+
+```
+
+### Dropping a database
+To drop the MySQL database with the given name if it exists, use the dropdb function:
+
+```
+import lisql
+
+lisql.dropdb(name)
+
+```
+
+### Connecting to a database
+To connect to the MySQL database with the given name if it exists, use the condb function:
+
+```
+import lisql
+
+lisql.condb(database_name)
+
+```
+
+### Connecting to a custom database
+To connect to the custom MySQL database with the provided host, username, password, and dbname, use the cuscondb function:
+
+```
+import lisql
+
+lisql.cuscondb(host, username, password, dbname)
+
+```
+
+### Creating a table
+To create a new table in the currently connected MySQL database with the given table name and columns, use the create_table function:
+
+```
+import lisql
+
+columns = {
+    "column1": "VARCHAR(255)",
+    "column2": "INT",
+    "column3": "DATETIME"
+}
+
+lisql.create_table("my_table", columns)
+
+```
+
+### Dropping a table
+To drop the table with the given table name in the currently connected MySQL database, use the drop_table function:
+
+```
+import lisql
+
+lisql.drop_table("my_table")
+
+```
+
+### Inserting data
+To insert a row of data into the table with the given table name and values, use the insert_data function:
+
+```
+import lisql
+
+values = {
+    "column1": "value1",
+    "column2": 123,
+    "column3": "2022-03-08 12:00:00"
+}
+
+lisql.insert_data("my_table", values)
+
+```
+
+### Retrieving data
+To retrieve the data from the table with the given table name and columns, use the select_data function:
+
+```
+import lisql
+
+columns = ["column1", "column2", "column3"]
+data = lisql.select_data("my_table", columns)
+
+for row in data:
+    print(row)
+
+```
+
+### Updating data
+To update the rows in the table with the given table name that meet the given condition with the new column values, use the update_data function:
+
+```
+import lisql
+
+column_values = {
+    "column2": 456,
+    "column3": "2022-03-08 13:00:00"
+}
+
+condition = "column1 = 'value1'"
+
+lisql.update_data("my_table", column_values, condition)
+
+```
+
+### Deleting Data
+To delete rows from a table, you can use the delete_data function. It takes two arguments: the table_name and a condition that specifies which rows to delete.
+
+```
+import lisql
+table_name = "employees"
+condition = "salary < 50000"
+
+lisql.delete_data(table_name, condition)
+
+```
+
+### Closing the Connection
+When you're finished working with the database, you should close the connection using the close_con function. This will close the connection to the database. If you try to execute any functions that require a database connection after calling close_con, you will get an error.
+
+```
+import lisql
+lisql.close_con()
+
+```
+
+### Getting a List of Databases and Tables
+You can get a list of all the databases on the MySQL server using the show_databases function. This will return a list of database names.
+
+```
+import lisql
+lisql.show_databases()
+```
+
+To get a list of all the tables in the currently selected database, you can use the show_tables function:
+
+```
+import lisql
+lisql.show_tables()
+```
+This will return a list of table names.
+
+### Executing SQL Queries
+If you need to execute a SQL query that is not covered by the functions provided by lisql, you can use the execute_query function. It takes one argument: the SQL query string.
+
+```
+import lisql
+lisql.execute_query(query)
+```
+
+By default, execute_query will not return any results. If you want to retrieve the results of the query, you can set the fetch argument to True:
+```
+im;ort lisql
+lisql.execute_query(query, fetch=True)
+```
+This will return the results of the query as a list of tuples.
+
+### Retrieving Table Information
+You can get information about the columns in a table using the describe_table function. It takes one argument: the table_name.
+
+```
+import lisql
+lisql.describe_table(table_name)
+```
+This will return a list of dictionaries, where each dictionary represents a column in the table. The keys of the dictionary are the column attributes (e.g. "Field", "Type", "Null", etc.) and the values are the corresponding values for each column.
