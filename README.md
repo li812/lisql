@@ -2,9 +2,32 @@
 
 lisql is a Python package that provides a simple interface for interacting with MySQL databases. It includes functions for creating connections, creating and dropping databases and tables, inserting and selecting data, updating and deleting rows, and more.
 
-## Installation
 
-To install `lisql`, use pip:
+# Make sure you have upgraded version of pip
+Windows
+```
+py -m pip install --upgrade pip
+```
+
+Linux/MAC OS
+```
+python3 -m pip install --upgrade pip
+```
+
+# Make sure you mysql connector installed
+Windows
+```
+py -m pip install mysql-connector-python
+```
+
+Linux/MAC OS
+```
+python3 -m pip install mysql-connector-python
+
+
+
+## INSTALATION
+Run the following to install `lisql`, using pip:
 ```
 pip install lisql
 ```

@@ -1,4 +1,1 @@
-mysql.connector
-mysql
-webbrowser
-Pillow
+

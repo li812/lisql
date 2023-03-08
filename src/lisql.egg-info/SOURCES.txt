@@ -1,6 +1,9 @@
+LICENSE
 README.md
-setup.py
-src/lisql.py
+pyproject.toml
+setup.cfg
+src/lisql/__init__.py
+src/lisql/lisql.py
 src/lisql.egg-info/PKG-INFO
 src/lisql.egg-info/SOURCES.txt
 src/lisql.egg-info/dependency_links.txt
