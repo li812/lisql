@@ -2,9 +2,7 @@
 from contextlib import nullcontext
 import mysql.connector
 import contextlib
-import tkinter as tk
-import webbrowser
-from PIL import Image, ImageTk, ImageDraw
+
 
 #Start of create connection
 def creacon():
@@ -52,11 +50,6 @@ def creadb(name):
 
 #Start of drop database
 def dropdb(name):
-    mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password=""
-    )
     exe = mydb.cursor()
     cdb ="DROP DATABASE "
     sql = cdb+name
