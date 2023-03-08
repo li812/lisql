@@ -23,7 +23,7 @@ py -m pip install mysql-connector-python
 Linux/MAC OS
 ```
 python3 -m pip install mysql-connector-python
-
+```
 
 
 ## INSTALATION
