@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: lisql
-Version: 2.0.1
+Version: 2.0.2
 Summary: Provides simple funtions to interact with MySQL databases and tables.
 Home-page: https://github.com/li812/lisql
 Author: Ali Ahammad
