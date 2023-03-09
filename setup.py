@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='lisql',
-    version='2.0.7',
+    version='2.0.8',
     py_modules=['lisql'],
     description='Provides simple funtions to interact with MySQL databases and tables.',
     author='Ali Ahammad',
