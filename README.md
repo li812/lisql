@@ -289,6 +289,69 @@ lisql.drop_database(mydb, 'mydatabase')
 
 ```
 
+### Here's an example program that demonstrates connecting to multiple servers and databases:
+```
+import lisql
+
+# Create a connection to a local MySQL server with default user and password values
+local_db = lisql.create_connection()
+
+# Create a connection to a remote MySQL server with specified host, user, and password values
+remote_db = lisql.create_remote_connection(host="example.com", user="myusername", password="mypassword")
+
+# Connect to a database on the local server
+lisql.connect_database(local_db, "my_local_database")
+
+# Connect to a database on the remote server
+lisql.connect_remote_database(remote_db, host="example.com", username="myusername", password="mypassword", database="my_remote_database")
+
+# List all tables in the current database on the local server
+local_tables = lisql.show_tables(local_db)
+print("Tables in local database:")
+for table in local_tables:
+    print(table)
+
+# List all tables in the current database on the remote server
+remote_tables = lisql.show_tables(remote_db)
+print("Tables in remote database:")
+for table in remote_tables:
+    print(table)
+
+# Select data from a table in the local database
+local_data = lisql.select_data(local_db, "my_table", ["column1", "column2"])
+for row in local_data:
+    print(row)
+
+# Insert data into a table in the remote database
+remote_data = [("value1", "value2"), ("value3", "value4")]
+lisql.insert_data(remote_db, "my_table", remote_data)
+
+# Delete data from a table in the remote database where a condition is true
+lisql.delete_data(remote_db, "my_table", "column1 = 'value1'")
+
+# Update data in a table in the local database where a condition is true
+lisql.update_data(local_db, "my_table", {"column2": "new_value"}, "column1 = 'value1'")
+
+# Execute a SQL query on the remote database and fetch all rows
+remote_query = "SELECT * FROM my_table"
+remote_result = lisql.execute_query(remote_db, remote_query, fetch=True)
+for row in remote_result:
+    print(row)
+
+# Describe a table in the local database
+local_description = lisql.describe_table(local_db, "my_table")
+print("Columns in local table:")
+for column in local_description:
+    print(column)
+
+# Describe the remote database
+remote_description = lisql.describe_database(remote_db)
+print("Tables in remote database:")
+for table in remote_description:
+    print(table)
+
+```
+
 
 ## For any questions, bug reports, or feedback, please feel free to contact the developers via the GitHub repository:
 
