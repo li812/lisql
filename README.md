@@ -1,8 +1,6 @@
 # `lisql`
 
-The `lisql` package is a Python library that provides a simple interface for interacting with MySQL databases using the mysql-connector-python library. It allows users to perform various operations on MySQL databases such as creating and connecting to databases, creating tables, inserting and retrieving data, updating and deleting data, and executing custom SQL queries.
-
-Using `lisql` provides benefits over other similar packages as it provides an easy-to-use and streamlined interface for performing common operations on MySQL databases. The package is also lightweight, making it ideal for small to medium-sized projects that require working with MySQL databases.
+`lisql` is a Python package that provides a simple and intuitive interface to work with MySQL databases. It can be used to perform various operations such as creating and dropping databases and tables, inserting and selecting data, and executing SQL queries. `lisql` can also be used in various fields where data is stored in MySQL databases, such as web development, data analytics, business intelligence, and more. With its easy-to-use functions for connecting to, querying, and modifying databases, `lisql` can help developers and analysts efficiently work with MySQL databases in their projects. Additionally, `lisql` can be integrated with other Python libraries and tools, such as Pandas and Scikit-learn, to provide more advanced data manipulation and analysis capabilities.
 
 ## Requirements:
 Python 3.6 or higher
