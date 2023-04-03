@@ -472,8 +472,7 @@ In this example, we first create connections to two remote MySQL servers using c
 
 Note that this is just an example, and you can use other data science technologies such as Apache Spark or PyTorch with lisql in a similar way.
 
-## For any questions, bug reports, or feedback, please feel free to contact the developers via the GitHub repository:
+## For any questions, bug reports, or feedback, please feel free to contact the developers via:
+EMail: aliahammad0812@outlook.com 
+Instagram: https://www.instagram.com/the_raptor_rider_
 
-### https://github.com/li812/lisql
-
-or by email at aliahammad0812@outlook.com .
