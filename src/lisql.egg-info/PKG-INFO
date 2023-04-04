@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: lisql
-Version: 2.0.8
+Version: 2.0.9
 Summary: Provides simple funtions to interact with MySQL databases and tables.
 Home-page: https://github.com/li812/lisql
 Author: Ali Ahammad
@@ -19,6 +19,8 @@ Description-Content-Type: text/markdown
 License-File: LICENSE
 
 # `lisql`
+
+![logo](https://user-images.githubusercontent.com/68907011/229516295-04088400-302d-4849-bc48-9fd327800566.png)
 
 `lisql` is a Python package that provides a simple and intuitive interface to work with MySQL databases. It can be used to perform various operations such as creating and dropping databases and tables, inserting and selecting data, and executing SQL queries. `lisql` can also be used in various fields where data is stored in MySQL databases, such as web development, data analytics, business intelligence, and more. With its easy-to-use functions for connecting to, querying, and modifying databases, `lisql` can help developers and analysts efficiently work with MySQL databases in their projects. Additionally, `lisql` can be integrated with other Python libraries and tools, such as Pandas and Scikit-learn, to provide more advanced data manipulation and analysis capabilities.
 
@@ -490,8 +492,8 @@ In this example, we first create connections to two remote MySQL servers using c
 
 Note that this is just an example, and you can use other data science technologies such as Apache Spark or PyTorch with lisql in a similar way.
 
-## For any questions, bug reports, or feedback, please feel free to contact the developers via the GitHub repository:
+## For any questions, bug reports, or feedback, please feel free to contact the developers via:
+### Email: aliahammad0812@outlook.com 
 
-### https://github.com/li812/lisql
+### Instagram: https://www.instagram.com/the_raptor_rider_/ 
 
-or by email at aliahammad0812@outlook.com .
