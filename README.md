@@ -1,18 +1,57 @@
-# `lisql`
 
-![logo](https://user-images.githubusercontent.com/68907011/229516295-04088400-302d-4849-bc48-9fd327800566.png)
+# LiSQL
+## Simplifying MySQL Database Management with Python
 
-`lisql` is a Python package that provides a simple and intuitive interface to work with MySQL databases. It can be used to perform various operations such as creating and dropping databases and tables, inserting and selecting data, and executing SQL queries. `lisql` can also be used in various fields where data is stored in MySQL databases, such as web development, data analytics, business intelligence, and more. With its easy-to-use functions for connecting to, querying, and modifying databases, `lisql` can help developers and analysts efficiently work with MySQL databases in their projects. Additionally, `lisql` can be integrated with other Python libraries and tools, such as Pandas and Scikit-learn, to provide more advanced data manipulation and analysis capabilities.
+![LiSQL Logo](https://user-images.githubusercontent.com/68907011/229516295-04088400-302d-4849-bc48-9fd327800566.png)
 
-## Requirements:
-Python 3.6 or higher
-mysql-connector-python library (version 8.0 or higher)
+## Overview
+
+LiSQL is a feature-rich Python package designed to streamline interactions with multiple MySQL databases across different servers. Whether you're a developer or a data scientist, LiSQL offers an intuitive interface that simplifies database management, data manipulation, and aggregation tasks.
+
+With LiSQL, connecting to both local and remote MySQL databases becomes effortless. Its seamless integration with Python projects, including web development, data analytics, and business intelligence, makes it a versatile tool for various applications.
+
+
+## Key Features of LiSQL
+
+- **Efficient Connection** Management: LiSQL facilitates establishing connections to different servers, enabling seamless data access and manipulation.
+
+- **Simplified Database and Table Operations**: Create, drop, and describe databases and tables with ease, effectively organizing and structuring your data.
+
+- **Easy Data Manipulation**: Perform data manipulations effortlessly with LiSQL's functions for selecting, inserting, updating, and deleting data.
+
+- **Insightful Aggregate Functions**: Quickly gain valuable insights with LiSQL's aggregate functions, including COUNT, SUM, AVG, MIN, and MAX.
+
+- **Transaction Support**: Execute multiple database operations as a single unit with transaction support, ensuring data integrity and consistency.
+
+
+## Requirements
+#### 1. Python 3.6 or higher:
+LiSQL requires Python 3.6 or higher.
+
+
+#### 2. Python MySQL Connector: 
+LiSQL depends on the MySQL Connector/Python library to establish connections with MySQL databases. Make sure you have this library installed.
 
 You can install the mysql-connector-python library using pip:
 ```commandline
 pip install mysql-connector-python
 
 ```
+#### 3. MySQL Server: 
+You need access to a MySQL server, either on your local machine or a remote server, to use LiSQL for database operations.
+
+#### 4. MySQL Database: 
+Ensure that you have the necessary privileges to create, drop, and modify databases on the MySQL server you are connecting to.
+
+#### 5. Network Connectivity: 
+If you plan to connect to a remote MySQL server, make sure you have network connectivity to the server and the required permissions to access it.
+
+#### 6. Operating System: 
+LiSQL is compatible with Windows, macOS, and Linux operating systems.
+
+#### 7. Python Packages: 
+LiSQL itself does not have additional dependencies beyond the MySQL Connector/Python library. However, depending on your specific use case, you may need additional Python packages for data processing, web development, or other functionalities.
+
 ## Installation:
 
 To install the `lisql` package, you can follow the steps below:
@@ -38,23 +77,12 @@ import lisql
 
 ```
 
-5: If you want to use a remote MySQL server, make sure you have the necessary credentials (host, username, and password) to connect to the server.
 
-6: To connect to a remote MySQL server, you can use the `create_remote_connection()` function, passing in the host, username, and password as arguments:
-```
-mydb = lisql.create_remote_connection(host, username, password)
-```
-
-7: Once you have a database connection, you can use the `connect_database()` function to connect to a specific database:
-```commandline
-mydb = lisql.connect_database(mydb, 'mydatabase')
-
-```
-8: You can now start executing SQL queries using the `lisql` package.
+5: You can now start executing SQL queries using the `lisql` package.
 Note: If you encounter any errors during installation, make sure you have the necessary permissions to install Python packages on your machine. You can also try running the installation command with administrative privileges (e.g., using sudo on Linux or macOS).
 
 ## Usage:
-
+### LiSQL provides a range of functions for seamless MySQL database interaction:
 ### 1: Creating a Connection
 To create a connection to a MySQL server, you can use the create_connection() function:
 ```
@@ -288,6 +316,13 @@ mydb = lisql.create_connection()
 lisql.drop_database(mydb, 'mydatabase')
 
 ```
+### 10: For help:
+```commandline
+import lisql
+
+lisql.help
+
+```
 ## Examples
 ### Here's an example program that demonstrates connecting to multiple servers and databases:
 ```
@@ -352,6 +387,41 @@ for table in remote_description:
 
 ```
 This program connects to a local and remote MySQL server, connects to databases on each server, performs various database operations, and retrieves information about tables and databases.
+
+
+### Here's an example of using Transaction Support in the lisql package to create a table and insert data into it as part of a single transaction:
+
+```
+import lisql
+
+# Create a connection to a local MySQL server
+mydb = lisql.create_connection()
+
+# Connect to a database
+mydb = lisql.connect_database(mydb, 'mydatabase')
+
+# Enable transaction support
+mydb.autocommit = False
+
+# Define the table columns
+columns = ['id INT PRIMARY KEY', 'name VARCHAR(255)', 'age INT']
+
+# Create a table with transaction support
+lisql.create_table(mydb, 'students', columns, transaction=True)
+
+# Insert data into the table as part of the same transaction
+values = [(1, 'John Doe', 25), (2, 'Jane Smith', 30)]
+lisql.insert_data(mydb, 'students', values, transaction=True)
+
+# Commit the transaction to save changes
+mydb.commit()
+
+# Display the contents of the table after the transaction
+data = lisql.select_data(mydb, 'students', ['id', 'name', 'age'])
+for row in data:
+    print(row)
+
+```
 
 ### Here's an example program that demonstrates how to use lisql with pandas and numpy on two servers:
 ```
@@ -472,7 +542,12 @@ In this example, we first create connections to two remote MySQL servers using c
 
 Note that this is just an example, and you can use other data science technologies such as Apache Spark or PyTorch with lisql in a similar way.
 
-## For any questions, bug reports, or feedback, please feel free to contact the developers via:
+## License
+
+LiSQL is distributed under the MIT License. See the [LICENSE](https://github.com/li812/lisql/blob/main/LICENSE) file for more details.
+
+## Contact
+stions, bug reports, or feedback, please feel free to contact the developers via:
 ### Email: aliahammad0812@outlook.com 
 
 ### Instagram: https://www.instagram.com/the_raptor_rider_/ 
