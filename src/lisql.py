@@ -114,8 +114,6 @@ def drop_database(mydb, name, transaction=False):
             print(f'Database {name} does not exist')
         else:
             print(f'Something else went wrong: {e}')
-    except Exception as e:
-        print(f'Something else went wrong: {e}')
 
 
 def connect_database(mydb, name, transaction=False):
@@ -167,6 +165,7 @@ def create_table(mydb, table_name, columns, transaction=False):
         if transaction:
             mydb.rollback()  # Roll back the transaction if an error occurs
         print(f"Error creating table: {e}")
+
 
 def drop_table(mydb, table_name, transaction=False):
     cursor = mydb.cursor()

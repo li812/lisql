@@ -1,11 +1,13 @@
 Metadata-Version: 2.1
 Name: lisql
-Version: 2.1.1
+Version: 2.1.2
 Summary: Provides simple funtions to interact with MySQL databases and tables.
 Home-page: https://github.com/li812/lisql
 Author: Ali Ahammad
 Author-email: aliahammad0812@outlook.com
+License: UNKNOWN
 Project-URL: Bug Tracker, https://github.com/li812/lisql/issues
+Platform: UNKNOWN
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python :: 3
 Classifier: Programming Language :: Python :: 3.6
@@ -571,4 +573,6 @@ stions, bug reports, or feedback, please feel free to contact the developers via
 ### Email: aliahammad0812@outlook.com 
 
 ### Instagram: https://www.instagram.com/the_raptor_rider_/ 
+
+
 
