@@ -36,5 +36,3 @@ def create_connection():
 create_connection()
 
 
-(base) li@Alis-MacBook-Pro lisql % /opt/anaconda3/bin/python /Users/li/Documents/GitHub/lisql/src/test.py
-Error creating local connection: (2002, "Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)")
