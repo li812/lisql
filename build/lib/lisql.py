@@ -64,7 +64,7 @@ def create_remote_connection(host, user, password):
         print(f"Error creating remote connection: {e}")
         return None
 
-def create_database(mydb, name, transaction=False):
+def create_database(mydb, name, transaction=True):
     cursor = mydb.cursor()
     create_db_query = f'CREATE DATABASE {name}'
     print(f'Executing command: {create_db_query}')
@@ -90,7 +90,7 @@ def create_database(mydb, name, transaction=False):
     return mydb
 
 
-def connect_remote_database(host, username, password, database, transaction=False):
+def connect_remote_database(host, username, password, database, transaction=True):
     try:
         mydb = mysql.connector.connect(
             host=host,
@@ -107,7 +107,7 @@ def connect_remote_database(host, username, password, database, transaction=Fals
         return None
 
 
-def drop_database(mydb, name, transaction=False):
+def drop_database(mydb, name, transaction=True):
     cursor = mydb.cursor()
     drop_db_query = f'DROP DATABASE IF EXISTS {name}'
     print(f'Executing command: {drop_db_query}')
@@ -130,7 +130,7 @@ def drop_database(mydb, name, transaction=False):
             print(f'Something else went wrong: {e}')
 
 
-def connect_database(mydb, name, transaction=False):
+def connect_database(mydb, name, transaction=True):
     try:
         mydb.database = name
         print('Connection established')
@@ -160,7 +160,7 @@ def show_tables(mydb):
         print(f"Error while showing tables: {e}")
         return []
     
-def create_table(mydb, table_name, columns, transaction=False):
+def create_table(mydb, table_name, columns, transaction=True):
     cursor = mydb.cursor()
     column_definitions = ", ".join(columns)
     create_table_query = f"CREATE TABLE {table_name} ({column_definitions})"
@@ -181,7 +181,7 @@ def create_table(mydb, table_name, columns, transaction=False):
         print(f"Error creating table: {e}")
 
 
-def drop_table(mydb, table_name, transaction=False):
+def drop_table(mydb, table_name, transaction=True):
     cursor = mydb.cursor()
     drop_table_query = f'DROP TABLE IF EXISTS {table_name}'
     print(f'Executing command: {drop_table_query}')
@@ -242,7 +242,7 @@ def select_data(mydb, table_name, columns):
         print(f"Error while selecting data: {e}")
         return
 
-def insert_data(mydb, table_name, values, transaction=False):
+def insert_data(mydb, table_name, values, transaction=True):
     try:
         cursor = mydb.cursor()
         value_list = ", ".join(["%s"] * len(values))
@@ -266,7 +266,7 @@ def insert_data(mydb, table_name, values, transaction=False):
 
 
 
-def delete_data(mydb, table_name, condition, transaction=False):
+def delete_data(mydb, table_name, condition, transaction=True):
     try:
         cursor = mydb.cursor()
         delete_query = f"DELETE FROM {table_name} WHERE {condition}"
@@ -287,7 +287,7 @@ def delete_data(mydb, table_name, condition, transaction=False):
         print(f"Error deleting data: {e}")
 
 
-def update_data(mydb, table_name, column_values, condition, transaction=False):
+def update_data(mydb, table_name, column_values, condition, transaction=True):
     try:
         cursor = mydb.cursor()
         column_value_pairs = [f"{col} = %s" for col in column_values.keys()]
@@ -310,7 +310,7 @@ def update_data(mydb, table_name, column_values, condition, transaction=False):
         print(f"Error updating data: {e}")
 
 
-def execute_query(mydb, query, fetch=False, transaction=False):
+def execute_query(mydb, query, fetch=False, transaction=True):
     try:
         cursor = mydb.cursor()
         
@@ -370,109 +370,66 @@ def describe_database(mydb):
 
 ########################   Start of Aggregate functions     #######################
 
-def select_count(mydb, table, column, transaction=False):
+def select_count(mydb, table, column):
     cursor = mydb.cursor()
     query = f"SELECT COUNT({column}) FROM {table}"
     try:
-        if transaction:
-            mydb.start_transaction()  # Start the transaction explicitly
-        
         cursor.execute(query)
         result = cursor.fetchone()[0]
-        
-        if transaction:
-            mydb.commit()  # Commit the transaction if transaction=True
-        
         return result
     except mysql.connector.Error as e:
-        if transaction:
-            mydb.rollback()  # Roll back the transaction if an error occurs
         print(f"Error executing query: {e}")
         return None
 
 
-def select_sum(mydb, table, column, transaction=False):
+def select_sum(mydb, table, column):
     cursor = mydb.cursor()
     query = f"SELECT SUM({column}) FROM {table}"
     try:
-        if transaction:
-            mydb.start_transaction()  # Start the transaction explicitly
-        
         cursor.execute(query)
         result = cursor.fetchone()[0]
-        
-        if transaction:
-            mydb.commit()  # Commit the transaction if transaction=True
-        
         return result
     except mysql.connector.Error as e:
-        if transaction:
-            mydb.rollback()  # Roll back the transaction if an error occurs
         print(f"Error executing query: {e}")
         return None
 
 
-def select_avg(mydb, table, column, transaction=False):
+def select_avg(mydb, table, column):
     cursor = mydb.cursor()
     query = f"SELECT AVG({column}) FROM {table}"
     try:
-        if transaction:
-            mydb.start_transaction()  # Start the transaction explicitly
-        
         cursor.execute(query)
         result = cursor.fetchone()[0]
-        
-        if transaction:
-            mydb.commit()  # Commit the transaction if transaction=True
-        
         return result
     except mysql.connector.Error as e:
-        if transaction:
-            mydb.rollback()  # Roll back the transaction if an error occurs
         print(f"Error executing query: {e}")
         return None
 
 
-def select_min(mydb, table, column, transaction=False):
+def select_min(mydb, table, column):
     cursor = mydb.cursor()
     query = f"SELECT MIN({column}) FROM {table}"
     try:
-        if transaction:
-            mydb.start_transaction()  # Start the transaction explicitly
-        
         cursor.execute(query)
         result = cursor.fetchone()[0]
-        
-        if transaction:
-            mydb.commit()  # Commit the transaction if transaction=True
-        
         return result
     except mysql.connector.Error as e:
-        if transaction:
-            mydb.rollback()  # Roll back the transaction if an error occurs
         print(f"Error executing query: {e}")
         return None
 
 
-def select_max(mydb, table, column, transaction=False):
+def select_max(mydb, table, column):
     cursor = mydb.cursor()
     query = f"SELECT MAX({column}) FROM {table}"
     try:
-        if transaction:
-            mydb.start_transaction()  # Start the transaction explicitly
-        
         cursor.execute(query)
         result = cursor.fetchone()[0]
-        
-        if transaction:
-            mydb.commit()  # Commit the transaction if transaction=True
-        
         return result
     except mysql.connector.Error as e:
-        if transaction:
-            mydb.rollback()  # Roll back the transaction if an error occurs
         print(f"Error executing query: {e}")
         return None
+
+
 
 
 ########################   End of Aggregate functions     #######################
@@ -517,11 +474,11 @@ def help(func=None):
         print("- show_tables(mydb): Displays a list of tables in the connected database.")
         print("  Example: show_tables(mydb)")
         print("  This function shows a list of tables in the connected local or remote MySQL database.")
-        print("- create_table(mydb, table_name, columns, transaction=False): Creates a table with the specified columns.")
+        print("- create_table(mydb, table_name, columns, transaction=True): Creates a table with the specified columns.")
         print("  Example: columns = ['id INT PRIMARY KEY', 'name VARCHAR(255)', 'age INT']")
         print("           create_table(mydb, 'students', columns, transaction=True)")
         print("  This function creates a new table with the specified name and columns in the connected local or remote MySQL database.")        
-        print("- drop_table(mydb, table_name, transaction=False): Deletes the specified table from the connected database.")
+        print("- drop_table(mydb, table_name, transaction=True): Deletes the specified table from the connected database.")
         print("  Example: drop_table(mydb, 'students', transaction=True)")
         print("  This function drops the specified table from the connected local or remote MySQL database.")
         print("- describe_table(mydb, table_name): Displays information about the specified table in the connected database.")
@@ -536,23 +493,23 @@ def help(func=None):
         print("               print(data)")
         print("  This function retrieves data from the specified columns in the specified table in the connected local or remote MySQL database.")
         
-        print("- insert_data(mydb, table_name, values, transaction=False): Inserts data into the specified table.")
+        print("- insert_data(mydb, table_name, values, transaction=True): Inserts data into the specified table.")
         print("  Example: values = (1, 'John Doe', 25)")
         print("           insert_data(mydb, 'students', values, transaction=True)")
         print("  This function inserts data into the specified table in the connected local or remote MySQL database.")
         
-        print("- delete_data(mydb, table_name, condition, transaction=False): Deletes data from the specified table that meets the specified condition.")
+        print("- delete_data(mydb, table_name, condition, transaction=True): Deletes data from the specified table that meets the specified condition.")
         print("  Example: condition = 'age > 30'")
         print("           delete_data(mydb, 'students', condition, transaction=True)")
         print("  This function deletes data from the specified table that meets the specified condition in the connected local or remote MySQL database.")
         
-        print("- update_data(mydb, table_name, column_values, condition, transaction=False): Updates data in the specified table that meets the specified condition.")
+        print("- update_data(mydb, table_name, column_values, condition, transaction=True): Updates data in the specified table that meets the specified condition.")
         print("  Example: column_values = {'name': 'John Smith', 'age': 32}")
         print("           condition = 'id = 1'")
         print("           update_data(mydb, 'students', column_values, condition, transaction=True)")
         print("  This function updates data in the specified table that meets the specified condition in the connected local or remote MySQL database.")
         
-        print("- execute_query(mydb, query, fetch=False, transaction=False): Executes the specified SQL query.")
+        print("- execute_query(mydb, query, fetch=False, transaction=True): Executes the specified SQL query.")
         print("  Example: query = 'SELECT * FROM students'")
         print("           execute_query(mydb, query, fetch=True)")
         print("  This function executes the specified SQL query in the connected local or remote MySQL database.")
@@ -576,14 +533,14 @@ def help(func=None):
         # Transaction Support Examples
         print("\nTransaction Support")
         print("Here are the functions in LiSQL that support Transaction Support:")
-        print("- create_database(mydb, name, transaction=False)")
-        print("- drop_database(mydb, name, transaction=False)")
-        print("- create_table(mydb, table_name, columns, transaction=False)")
-        print("- drop_table(mydb, table_name, transaction=False)")
-        print("- insert_data(mydb, table_name, values, transaction=False)")
-        print("- delete_data(mydb, table_name, condition, transaction=False)")
-        print("- update_data(mydb, table_name, column_values, condition, transaction=False)")
-        print("- execute_query(mydb, query, fetch=False, transaction=False)")
+        print("- create_database(mydb, name, transaction=True)")
+        print("- drop_database(mydb, name, transaction=True)")
+        print("- create_table(mydb, table_name, columns, transaction=True)")
+        print("- drop_table(mydb, table_name, transaction=True)")
+        print("- insert_data(mydb, table_name, values, transaction=True)")
+        print("- delete_data(mydb, table_name, condition, transaction=True)")
+        print("- update_data(mydb, table_name, column_values, condition, transaction=True)")
+        print("- execute_query(mydb, query, fetch=False, transaction=True)")
         print("Remember that you need to pass transaction=True as an argument to these functions to enable Transaction Support. This ensures that the operations are executed as part of a single transaction, providing data consistency and rollback capabilities in case of errors.")
         print("- Example 1: Creating a table with transaction support")
         print("  columns = ['id INT PRIMARY KEY', 'name VARCHAR(255)', 'age INT']")

@@ -1,6 +1,6 @@
-Metadata-Version: 2.1.8
+Metadata-Version: 2.1.87
 Name: lisql
-Version: 2.1.8
+Version: 2.1.87
 Summary: Provides simple funtions to interact with MySQL databases and tables.
 Home-page: https://github.com/li812/lisql
 Author: Ali Ahammad

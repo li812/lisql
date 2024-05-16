@@ -548,7 +548,9 @@ LiSQL is distributed under the MIT License. See the [LICENSE](https://github.com
 
 ## Contact
 stions, bug reports, or feedback, please feel free to contact the developers via:
-### Email: aliahammad0812@outlook.com 
+### Email: mail@aliahammad.com 
+
+### Website: https://www.aliahammad.com
 
 ### Instagram: https://www.instagram.com/the_raptor_rider_/ 
 
