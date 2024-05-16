@@ -9,8 +9,7 @@ print("""
 888      888 Y88b  d88P Y88b.Y8b88P 888           
 88888888 888  "Y8888P"   "Y888888"  88888888     2.2
                                Y8b                
-                                                  
-                                                                                                                                                   
+                                                                                                                                                                                                 
 """)
 
 import importlib
@@ -28,7 +27,6 @@ def check_and_install_mysql_connector():
             print("Error installing mysql-connector-python:", str(e))
 
 check_and_install_mysql_connector()
-
 
 import mysql.connector
 
@@ -148,7 +146,6 @@ def connect_database(mydb, name, transaction=True):
     return None
 
 
-
 def show_tables(mydb):
     try:
         cursor = mydb.cursor()
@@ -159,6 +156,7 @@ def show_tables(mydb):
     except mysql.connector.Error as e:
         print(f"Error while showing tables: {e}")
         return []
+    
     
 def create_table(mydb, table_name, columns, transaction=True):
     cursor = mydb.cursor()
@@ -199,7 +197,6 @@ def drop_table(mydb, table_name, transaction=True):
         if transaction:
             mydb.rollback()  # Roll back the transaction if an error occurs
         print(f"Error dropping table: {e}")
-
 
 
 def show_databases(mydb):
@@ -430,16 +427,15 @@ def select_max(mydb, table, column):
         return None
 
 
-
-
 ########################   End of Aggregate functions     #######################
+
 
 
 ########################   Start of help    #######################
 def help(func=None):
     if func is None:
         print("LiSQL Package - Python Package for Interacting with MySQL Databases")
-        print("Version: 2.1")
+        print("Version: 2.2")
         print("Description: LiSQL is a Python package that simplifies working with MySQL databases by providing various functions for connection management, database operations, table operations, and data manipulation.")
         print("\nAvailable functions:")
         # Group 1: Connection Management
@@ -510,80 +506,48 @@ def help(func=None):
         print("  This function updates data in the specified table that meets the specified condition in the connected local or remote MySQL database.")
         
         print("- execute_query(mydb, query, fetch=False, transaction=True): Executes the specified SQL query.")
-        print("  Example: query = 'SELECT * FROM students'")
-        print("           execute_query(mydb, query, fetch=True)")
+        print("  Example: query = 'SELECT * FROM students WHERE age > 30'")
+        print("           result = execute_query(mydb, query, fetch=True, transaction=True)")
         print("  This function executes the specified SQL query in the connected local or remote MySQL database.")
+        
+        print("- describe_database(mydb): Displays information about the connected database, including all tables and their structures.")
+        print("  Example: describe_database(mydb)")
+        print("  This function describes the connected database, including all tables and their structures in the connected local or remote MySQL database.")
+        
         # Group 5: Aggregate Functions
         print("\nAggregate Functions:")
-        print("- select_count(connection, table, column): Calculates the COUNT of records in the specified column of the table.")
-        print("  Example: count = select_count(mydb, 'students', 'id')")
-        print("  This function calculates the COUNT of records in the specified column of the table in the connected local or remote MySQL database.")
-        print("- select_sum(connection, table, column): Calculates the SUM of values in the specified column of the table.")
+        print("- select_count(mydb, table, column): Returns the count of non-null values in the specified column of the specified table.")
+        print("  Example: count = select_count(mydb, 'students', 'age')")
+        print("  This function returns the count of non-null values in the specified column of the specified table in the connected local or remote MySQL database.")
+        
+        print("- select_sum(mydb, table, column): Returns the sum of values in the specified column of the specified table.")
         print("  Example: total_age = select_sum(mydb, 'students', 'age')")
-        print("  This function calculates the SUM of values in the specified column of the table in the connected local or remote MySQL database.")
-        print("- select_avg(connection, table, column): Calculates the AVG of values in the specified column of the table.")
+        print("  This function returns the sum of values in the specified column of the specified table in the connected local or remote MySQL database.")
+        
+        print("- select_avg(mydb, table, column): Returns the average of values in the specified column of the specified table.")
         print("  Example: avg_age = select_avg(mydb, 'students', 'age')")
-        print("  This function calculates the AVG of values in the specified column of the table in the connected local or remote MySQL database.")
-        print("- select_min(connection, table, column): Retrieves the minimum value in the specified column of the table.")
+        print("  This function returns the average of values in the specified column of the specified table in the connected local or remote MySQL database.")
+        
+        print("- select_min(mydb, table, column): Returns the minimum value in the specified column of the specified table.")
         print("  Example: min_age = select_min(mydb, 'students', 'age')")
-        print("  This function retrieves the minimum value in the specified column of the table in the connected local or remote MySQL database.")
-        print("- select_max(connection, table, column): Retrieves the maximum value in the specified column of the table.")
+        print("  This function returns the minimum value in the specified column of the specified table in the connected local or remote MySQL database.")
+        
+        print("- select_max(mydb, table, column): Returns the maximum value in the specified column of the specified table.")
         print("  Example: max_age = select_max(mydb, 'students', 'age')")
-        print("  This function retrieves the maximum value in the specified column of the table in the connected local or remote MySQL database.")
-        # Transaction Support Examples
-        print("\nTransaction Support")
-        print("Here are the functions in LiSQL that support Transaction Support:")
-        print("- create_database(mydb, name, transaction=True)")
-        print("- drop_database(mydb, name, transaction=True)")
-        print("- create_table(mydb, table_name, columns, transaction=True)")
-        print("- drop_table(mydb, table_name, transaction=True)")
-        print("- insert_data(mydb, table_name, values, transaction=True)")
-        print("- delete_data(mydb, table_name, condition, transaction=True)")
-        print("- update_data(mydb, table_name, column_values, condition, transaction=True)")
-        print("- execute_query(mydb, query, fetch=False, transaction=True)")
-        print("Remember that you need to pass transaction=True as an argument to these functions to enable Transaction Support. This ensures that the operations are executed as part of a single transaction, providing data consistency and rollback capabilities in case of errors.")
-        print("- Example 1: Creating a table with transaction support")
-        print("  columns = ['id INT PRIMARY KEY', 'name VARCHAR(255)', 'age INT']")
-        print("  create_table(mydb, 'students', columns, transaction=True)")
-        print("  # This will create a new table 'students' with the specified columns.")
-        print("  # The transaction will ensure that the table is created only if all operations succeed. Otherwise, it will be rolled back.")
-        print("- Example 2: Inserting data with transaction support")
-        print("  values = (1, 'John Doe', 25)")
-        print("  insert_data(mydb, 'students', values, transaction=True)")
-        print("  # This will insert the specified data into the 'students' table.")
-        print("  # The transaction will ensure that the data is inserted only if all operations succeed. Otherwise, it will be rolled back.")
-        print("- Example 3: Executing multiple queries with transaction support")
-        print("  query1 = 'INSERT INTO students (id, name, age) VALUES (2, 'Jane Smith', 30)'")
-        print("  query2 = 'UPDATE students SET age = 31 WHERE id = 2'")
-        print("  execute_query(mydb, query1, transaction=True)")
-        print("  execute_query(mydb, query2, transaction=True)")
-        print("  # This will execute the specified queries as part of a single transaction.")
-        print("  # If any of the queries fail, the entire transaction will be rolled back.")
-        # Help for Aggregate Functions
-        print("\nHelp for Aggregate Functions")
-        print("Here are the functions in LiSQL that provide Aggregate Function Support:")
-        print("- select_count(connection, table, column)")
-        print("- select_sum(connection, table, column)")
-        print("- select_avg(connection, table, column)")
-        print("- select_min(connection, table, column)")
-        print("- select_max(connection, table, column)")
-        print("These functions allow you to perform aggregate calculations on the data in your MySQL database.")
-        print("To use these functions, simply call them with the appropriate arguments, and they will return the result of the aggregate calculation.")
-        print("For example, you can calculate the total number of records, the sum of values, the average value, the minimum value, or the maximum value in a column.")
-        print("Remember to pass the connection object, table name, and column name as arguments to these functions.")
-        print("For more information on each function, you can use the help() function followed by the function name.")
-        print("For example, help(select_count) will display information about the select_count() function.")
-        print("You can also refer to the LiSQL documentation for detailed usage instructions and examples.")
-    elif func.__name__ in globals():
-        print(help(func.__name__))
+        print("  This function returns the maximum value in the specified column of the specified table in the connected local or remote MySQL database.")
+        
+        print("\nFor more details about each function, you can use the 'help' function followed by the function name.")
+        print("Example: help(create_table)")
+        print("This will display detailed information about the 'create_table' function.")
+        print("\nNote: For remote database connections, make sure the necessary MySQL privileges are granted to the specified user and that the MySQL server allows remote connections.")
     else:
-        print(f"No help available for {func.__name__}.")
+        if func.__doc__:
+            print(func.__doc__)
+        else:
+            print("No documentation available for this function.")
+
 ########################   End of help    #######################
-
-
-
 
 
 def __version__():
     return 2.2
-

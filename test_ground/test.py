@@ -91,9 +91,11 @@ def select_min(mydb, table, column, transaction=True):
 
 #lisql.insert_data(db, "BORROW", (1007, 4, "2024-04-05"))
 
-lisql.show_table(db, "STUDENT")
+#lisql.show_table(db, "STUDENT")
 
 
+#print(lisql.describe_database(db))
 
+#print(lisql.select_max(db, "STUDENT", "USN"))
 
-print(lisql.select_max(db, "STUDENT", "USN"))
+print(lisql.describe_table(db,"STUDENT"))
